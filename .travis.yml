@@ -1,18 +1,14 @@
 language: csharp
-mono: none
 solution: Src/ServerGridEditor.sln
+os: windows
+install:
+  - nuget restore Src/ServerGridEditor.sln
+  - nuget install NUnit.Console -Version 3.9.0 -OutputDirectory testrunner
 
-jobs:
-  include:
-    - stage: Publish GitHub Release
-      os: windows
-      script:
-        - choco install dotnetcore-sdk
-        - dotnet --version
-        - dotnet restore
-        - dotnet publish ./Src -r win-x64 --configuration Release -p:PublishSingleFile=true
+script:
+  - msbuild /t:publish /p:Configuration=Release Src/ServerGridEditor.sln
 
 before_deploy:
   - git config --local user.name "antihax"
   - export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)}
-  - git tag $TRAVIS_TAG      
+  - git tag $TRAVIS_TAG
