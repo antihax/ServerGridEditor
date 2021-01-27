@@ -60,7 +60,7 @@ namespace ServerGridEditor.Code
 						  MainForm.DrawMap(
 								mainForm, islands, g,
 								showLines: showLines, showServerInfo: showServerInfo, showGridName: showGridName,
-						showIslands: showIslands, showDiscoZoneInfo: showDiscoZoneInfo,
+								showIslands: showIslands, showDiscoZoneInfo: showDiscoZoneInfo,
 								culling: null, alphaBackground: backgroundColor,
 								tile: tile, tileBrush: tileBrush, tileScale: tileScale,
 								translateH: 0, translateV: 0, forExport: true, bShowPathingGrid: false);

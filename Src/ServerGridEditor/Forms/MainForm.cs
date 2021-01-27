@@ -2846,16 +2846,24 @@ namespace ServerGridEditor
 								}
 
 								this.ExportSlippyMap(
-								islands, showLinesCheckbox.Checked, showServerInfoCheckbox.Checked,
-								showGridNameChckBox.Checked, showIslandsChckBox.Checked, showDiscoZoneInfoCheckbox.Checked,
-								tiledBackgroundCheckbox.Checked ? tile : null,
-								tiledBackgroundCheckbox.Checked ? tileBrush : null, tileScaleBox.Value, alphaBackground,
-								exportMapForm.ExportDirectory, (string text) =>
-								{
-									 Console.WriteLine(text);
-									 progressForm.NextStep(text);
-								},
-								exportMapForm.MaxZoom, exportMapForm.OverwriteExisting);
+									 islands, 
+									 showLinesCheckbox.Checked,
+									 showServerInfoCheckbox.Checked,
+									 showGridNameChckBox.Checked,
+									 showIslandsChckBox.Checked,
+									 showDiscoZoneInfoCheckbox.Checked,
+									 tiledBackgroundCheckbox.Checked ? tile : null,
+									 tiledBackgroundCheckbox.Checked ? tileBrush : null,
+									 tileScaleBox.Value,
+									 alphaBackground,
+									 exportMapForm.ExportDirectory,
+									 (string text) =>
+									 {
+										  Console.WriteLine(text);
+										  progressForm.NextStep(text);
+									 },
+									 exportMapForm.MaxZoom,
+									 exportMapForm.OverwriteExisting);
 						  }
 					 }
 					 catch (Exception ex)

@@ -1,0 +1,3 @@
+OceanDepthFadeExponent
+OceanWaterScatterIntensity
+OceanWaterScatterColor
