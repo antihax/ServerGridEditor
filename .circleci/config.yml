@@ -2,12 +2,11 @@ version: 2.1
 
 orbs:
   win: circleci/windows@2.2.0
-  github-release: haskell-works/github-release@1.3.3
+  github-release: h-matsuo/github-release@0.1.3
 
 jobs:
   build:
     executor: win/default     
-
     steps:
     - checkout
     - run:
@@ -17,17 +16,26 @@ jobs:
           Compress-Archive C:\Users\circleci\project\build\net472\publish\* SGE.zip
     - store_artifacts:
         path: SGE.zip
-
+    - persist_to_workspace:
+        root: .
+        paths:
+          - "*.zip*"             
   release:
     executor: github-release/default
     steps:
       - attach_workspace:
-          at: .
-      - run:
-          name: version number
-          command: |
-            echo "export BUILD_VERSION=\"${CIRCLE_BUILD_NUM}-${CIRCLE_SHA1:0:7}\"" | tee -a $BASH_ENV
-      - github-release/release:
-          tag: v$BUILD_VERSION
-          title: $BUILD_VERSION
-          artefacts-folder: .
+          at: .    
+      - github-release/create:
+          tag: v$CIRCLE_BUILD_NUM
+          title: SGE Auto-Build.
+          description: SGE Auto-Build.
+          file-path: SGE.zip
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - release:
+          requires:
+            - build
